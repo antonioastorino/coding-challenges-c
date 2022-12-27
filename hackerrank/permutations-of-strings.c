@@ -17,16 +17,11 @@ int factorial(int n)
 
 // Shift right of all the elements in `s` from position `i` to `j-1`
 // Replace the `i`-th element with the original `j`-th element (befor shifting)
-int swap2(char** s, int i, int j, int n)
+int swap_and_shift(char** s, int i, int j, int n)
 {
-    if (strcmp(s[i], s[j]) == 0)
+    if (strcmp(s[i], s[j]) == 0 || strcmp(s[j], s[j - 1]) == 0)
     {
-        //        printf("Dupliacte found\n");
-        return 0;
-    }
-    if (strcmp(s[j], s[j - 1]) == 0)
-    {
-        //        printf("This happened already\n");
+        // This swap would lead to an earlier or the same state 
         return 0;
     }
     char* tmp = s[j];
@@ -44,7 +39,7 @@ int swapper(char** s, int* swapper, int n)
     {
         if (swapper[i])
         {
-            if (!swap2(s, i, i + swapper[i], n))
+            if (!swap_and_shift(s, i, i + swapper[i], n))
             {
                 return 0;
             }
